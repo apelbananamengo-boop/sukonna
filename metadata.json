@@ -1,0 +1,6 @@
+{
+  "name": "Sukonna Boutique",
+  "description": "Premium boutique showcase for Sukonna specializing in Sarees, Panjabis, and Salwar Kameez.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
