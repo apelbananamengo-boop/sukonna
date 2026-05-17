@@ -18,16 +18,7 @@ import {
   Star
 } from "lucide-react";
 import { useState, useEffect } from "react";
-
-// Types
-interface Product {
-  id: number;
-  name: string;
-  price: string;
-  category: string;
-  image: string;
-  description: string;
-}
+import { productsData, Product } from "./data/products";
 
 export default function App() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -36,41 +27,38 @@ export default function App() {
   const [activeCategory, setActiveCategory] = useState("All");
 
   useEffect(() => {
-    fetch("/api/products")
-      .then(res => res.json())
-      .then(data => {
-        // Map image keys to their actual generated paths
-        const mappedData = data.map((p: Product) => {
-          let imagePath = "";
-          switch (p.image) {
-            case "jamdani":
-              imagePath = "/src/assets/images/hero_boutique_saree_1779017066457.png";
-              break;
-            case "salwar":
-              imagePath = "/src/assets/images/category_salwar_kameez_1779017087027.png";
-              break;
-            case "panjabi_blue":
-              imagePath = "/src/assets/images/category_panjabi_1779017106168.png";
-              break;
-            case "handloom":
-              imagePath = "/src/assets/images/boutique_vibe_detail_1779017122669.png";
-              break;
-            case "katan":
-              imagePath = "/src/assets/images/katan_saree_luxury_1779019030114.png";
-              break;
-            case "muslin":
-              imagePath = "/src/assets/images/muslin_floral_saree_1779019048336.png";
-              break;
-            case "panjabi_emerald":
-              imagePath = "/src/assets/images/premium_panjabi_emerald_1779019066757.png";
-              break;
-            default:
-              imagePath = "/src/assets/images/boutique_vibe_detail_1779017122669.png";
-          }
-          return { ...p, image: imagePath };
-        });
-        setProducts(mappedData);
-      });
+    // Map image keys to their actual generated paths
+    const mappedData = productsData.map((p: Product) => {
+      let imagePath = "";
+      switch (p.image) {
+        case "jamdani":
+          imagePath = "src/assets/images/hero_boutique_saree_1779017066457.png";
+          break;
+        case "salwar":
+          imagePath = "src/assets/images/category_salwar_kameez_1779017087027.png";
+          break;
+        case "panjabi_blue":
+          imagePath = "src/assets/images/category_panjabi_1779017106168.png";
+          break;
+        case "handloom":
+          imagePath = "src/assets/images/boutique_vibe_detail_1779017122669.png";
+          break;
+        case "katan":
+          imagePath = "src/assets/images/katan_saree_luxury_1779019030114.png";
+          break;
+        case "muslin":
+          imagePath = "src/assets/images/muslin_floral_saree_1779019048336.png";
+          break;
+        case "panjabi_emerald":
+          imagePath = "src/assets/images/premium_panjabi_emerald_1779019066757.png";
+          break;
+        default:
+          imagePath = "src/assets/images/boutique_vibe_detail_1779017122669.png";
+      }
+      // Note: Use relative paths for Vite build to resolve them as assets
+      return { ...p, image: imagePath };
+    });
+    setProducts(mappedData);
   }, []);
 
   const addToCart = (product: Product) => {
